@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { api } from "../../api";
 
 const initialState = { obj: {} };
+const apiUser = `${api}/user`;
 
 export const usuarioSlice = createSlice({
   name: "usuario",
@@ -16,9 +17,9 @@ export const usuarioSlice = createSlice({
 
 export const { setObjUsuario } = usuarioSlice.actions;
 
-export const CreateUser = (usuario) => {
+export const LoginUser = (usuario) => {
   return async function (dispatch) {
-    const response = await fetch(`${api}/cliente`, {
+    const response = await fetch(`${apiUser}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
