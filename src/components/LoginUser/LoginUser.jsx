@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { UserLogin } from "../../store/slices/Usuario";
+import { useNavigate } from "react-router-dom";
 
 export const LoginUser = () => {
   const [usuario, setUsuario] = useState({
@@ -8,8 +9,10 @@ export const LoginUser = () => {
     password: "",
   });
   const dispatch = useDispatch();
-  const handleLogin = () => {
-    dispatch(UserLogin(usuario));
+  const navigate = useNavigate();
+  const handleLogin = async () => {
+    await dispatch(UserLogin(usuario));
+    navigate("/infoUser");
   };
   const handleChange = (e) => {
     const { name, value } = e.target;

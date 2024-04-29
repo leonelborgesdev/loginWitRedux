@@ -18,6 +18,7 @@ export const { setObjUsuario } = usuarioSlice.actions;
 
 export const UserLogin = (usuario) => {
   return async function (dispatch) {
+    console.log("entro UserLogin1");
     const response = await fetch(`${api}/user/login`, {
       method: "POST",
       headers: {
@@ -25,6 +26,7 @@ export const UserLogin = (usuario) => {
       },
       body: JSON.stringify(usuario),
     });
+    console.log("entro UserLogin2");
     if (response) {
       const data = await response.json();
       console.log("data", data);
@@ -35,10 +37,12 @@ export const UserLogin = (usuario) => {
 };
 export const UserInfo = () => {
   return async function (dispatch) {
+    const token = localStorage.getItem("Authorization");
+    console.log("token", token);
     const response = await fetch(`${api}/user/userinfo`, {
       method: "GET",
       headers: {
-        Authorization: localStorage.getItem("Authorization"),
+        Authorization: `Bearer ${token}`,
       },
     });
     if (response) {
