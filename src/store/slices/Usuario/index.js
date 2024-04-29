@@ -47,7 +47,7 @@ export const UserInfo = () => {
     });
     if (response) {
       const data = await response.json();
-      console.log("dataUser", data);
+      dispatch(setObjUsuario(data.user));
     }
   };
 };
