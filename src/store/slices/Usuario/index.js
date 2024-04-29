@@ -33,5 +33,19 @@ export const UserLogin = (usuario) => {
     }
   };
 };
+export const UserInfo = () => {
+  return async function (dispatch) {
+    const response = await fetch(`${api}/user/userinfo`, {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    });
+    if (response) {
+      const data = await response.json();
+      console.log("dataUser", data);
+    }
+  };
+};
 
 export default usuarioSlice.reducer;
