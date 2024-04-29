@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { UserLogin } from "../../store/slices/Usuario";
 
 export const LoginUser = () => {
   const [usuario, setUsuario] = useState({
     email: "",
     password: "",
   });
-  const handleLogin = () => {};
+  const dispatch = useDispatch();
+  const handleLogin = () => {
+    dispatch(UserLogin(usuario));
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUsuario({
@@ -22,9 +27,9 @@ export const LoginUser = () => {
       </div>
       <div>
         <label>Contraseña</label>
-        <input type="password" />
+        <input type="password" name="password" onChange={handleChange} />
       </div>
-      <button>Login</button>
+      <button onClick={handleLogin}>Login</button>
     </div>
   );
 };

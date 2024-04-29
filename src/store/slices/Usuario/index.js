@@ -9,14 +9,14 @@ export const usuarioSlice = createSlice({
   reducers: {
     setObjUsuario: (state, action) => {
       state.obj = action.payload;
-      console.log(action.payload);
+      console.log("action.payload", action.payload);
     },
   },
 });
 
 export const { setObjUsuario } = usuarioSlice.actions;
 
-export const LoginUser = (usuario) => {
+export const UserLogin = (usuario) => {
   return async function (dispatch) {
     const response = await fetch(`${api}/user/login`, {
       method: "POST",
@@ -26,7 +26,10 @@ export const LoginUser = (usuario) => {
       body: JSON.stringify(usuario),
     });
     if (response) {
-      dispatch(setObjUsuario(usuario));
+      const data = await response.json();
+      console.log("data", data);
+      localStorage.setItem("Authorization", data.token);
+      //   dispatch(setObjUsuario(usuario));
     }
   };
 };
